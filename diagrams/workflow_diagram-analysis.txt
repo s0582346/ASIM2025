@@ -1,0 +1,30 @@
+================================================================================
+WORKFLOW ANALYSIS
+================================================================================
+Total Nodes: 8
+Total Edges: 9
+
+Node List:
+   1. __start__
+   2. requirement_elicitation
+   3. simulation_planning
+   4. code_generation
+   5. code_validation
+   6. scenario_testing
+   7. generate_final_output
+   8. __end__
+
+Edge List:
+   1. __start__ -> requirement_elicitation (direct)
+   2. code_generation -> code_validation (direct)
+   3. code_validation -> code_generation (direct)
+   4. code_validation -> scenario_testing (direct)
+   5. requirement_elicitation -> simulation_planning (direct)
+   6. scenario_testing -> code_generation (direct)
+   7. scenario_testing -> generate_final_output (direct)
+   8. simulation_planning -> code_generation (direct)
+   9. generate_final_output -> __end__ (direct)
+
+Potential Retry Loops:
+  - code_validation -> code_generation
+  - scenario_testing -> code_generation

@@ -1,0 +1,15 @@
+# requirements.txt
+langgraph>=0.0.19
+langchain-core>=0.1.8
+langchain-openai>=0.0.5
+langchain_anthropic
+langchain-google-genai
+langchain-deepseek
+python-dotenv>=1.0.0
+pylint>=2.17.0
+simpy>=4.0.1
+matplotlib
+pandas
+numpy
+scipy
+logging

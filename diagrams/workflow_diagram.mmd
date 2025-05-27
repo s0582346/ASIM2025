@@ -1,0 +1,26 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	requirement_elicitation(requirement_elicitation)
+	simulation_planning(simulation_planning)
+	code_generation(code_generation)
+	code_validation(code_validation)
+	scenario_testing(scenario_testing)
+	generate_final_output(generate_final_output)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> requirement_elicitation;
+	code_generation --> code_validation;
+	code_validation -. &nbsp;True&nbsp; .-> code_generation;
+	code_validation -. &nbsp;False&nbsp; .-> scenario_testing;
+	requirement_elicitation --> simulation_planning;
+	scenario_testing -. &nbsp;True&nbsp; .-> code_generation;
+	scenario_testing -. &nbsp;False&nbsp; .-> generate_final_output;
+	simulation_planning --> code_generation;
+	generate_final_output --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc
