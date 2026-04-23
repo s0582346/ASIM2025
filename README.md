@@ -36,7 +36,6 @@ Utility:
 Main requirements are:
 - Python 3.12
 - SimPy 4.1
-- OpenAI API key (for GPT model)
 - Anthropic API key (for Claude model)
 
 Check `requirements.txt` for all further requirements.
@@ -49,10 +48,10 @@ Check `requirements.txt` for all further requirements.
    ```
    pip install -r requirements.txt
    ```
-3. Create a "`.env`" file (dotenv file) in the project's main directory with your OpenAI and Anthropic API keys:
+3. Create a "`.env`" file (dotenv file) in the project's main directory with your Anthropic API key:
    ```
-   OPENAI_API_KEY=your-api-key-here
    ANTHROPIC_API_KEY=your-api-key-here
+   ANTHROPIC_MODEL=claude-sonnet-4-6
    ```
 
 ## Usage

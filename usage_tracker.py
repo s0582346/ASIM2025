@@ -49,26 +49,19 @@ class AgentUsageTracker:
         # Get the usage data
         usage = callback.usage_metadata
         
-        # Calculate costs (using Claude pricing)
+        # Calculate costs using Claude pricing for all tracked models.
         total_cost = 0
         for model, model_usage in usage.items():
-            # Claude 3.7 Sonnet model pricing https://docs.anthropic.com/en/docs/about-claude/pricing
-            if "claude" in model.lower():
-                # Claude pricing: $3 per 1M input tokens, $15 per 1M output tokens
-                input_cost = (model_usage.get('input_tokens', 0) / 1000000) * 3
-                output_cost = (model_usage.get('output_tokens', 0) / 1000000) * 15
-                model_cost = input_cost + output_cost
-            # GPT 4.1 model pricing https://platform.openai.com/docs/pricing
-            elif "gpt" in model.lower():
-                # GPT-4.1 pricing: $2.00 per 1M input tokens, $8.00 per 1M output tokens
-                input_cost = (model_usage.get('input_tokens', 0) / 1000000) * 2
-                output_cost = (model_usage.get('output_tokens', 0) / 1000000) * 8
-                model_cost = input_cost + output_cost
-            else:
-                # Default pricing if model not recognized (Open AI o3 cost)
-                input_cost = (model_usage.get('input_tokens', 0) / 1000000) * 10
-                output_cost = (model_usage.get('output_tokens', 0) / 1000000) * 40
-                model_cost = input_cost + output_cost
+            # Claude pricing: $3 per 1M input tokens, $15 per 1M output tokens.
+            # Reference: https://docs.anthropic.com/en/docs/about-claude/pricing
+            if "claude" not in model.lower():
+                logger.warning(
+                    f"Model '{model}' is not Claude-branded; applying Claude pricing as project default."
+                )
+
+            input_cost = (model_usage.get('input_tokens', 0) / 1000000) * 3
+            output_cost = (model_usage.get('output_tokens', 0) / 1000000) * 15
+            model_cost = input_cost + output_cost
                 
             total_cost += model_cost
             

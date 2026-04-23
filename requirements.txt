@@ -1,7 +1,6 @@
 # requirements.txt
 langgraph>=0.0.19
 langchain-core>=0.1.8
-langchain-openai>=0.0.5
 langchain_anthropic
 langchain-google-genai
 langchain-deepseek
