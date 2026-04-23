@@ -21,10 +21,21 @@ def requirement_elicitation_node(state: AgentState):
 
     # Create agent
     elicitor = create_requirement_elicitor_agent(callbacks=[callback])
+
+    conversation_history = state.get("conversation_history", [])
+    if not conversation_history:
+        conversation_history = [
+            HumanMessage(
+                content=(
+                    "I am ready to describe my production system. "
+                    "Please ask your first elicitation question."
+                )
+            )
+        ]
     
     # Invoke the agent
     result = elicitor.invoke({
-        "conversation_history": state["conversation_history"]
+        "conversation_history": conversation_history
     })
     
     # Log the token usage

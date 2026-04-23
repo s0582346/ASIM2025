@@ -29,8 +29,19 @@ def run_simulation_workflow():
     print("- Key metrics you want to track\n")
     
     while not state["requirements_summary"]:
+        conversation_history = state["conversation_history"]
+        if not conversation_history:
+            conversation_history = [
+                HumanMessage(
+                    content=(
+                        "I am ready to describe my production system. "
+                        "Please ask your first elicitation question."
+                    )
+                )
+            ]
+
         response = elicitor.invoke({
-            "conversation_history": state["conversation_history"]
+            "conversation_history": conversation_history
         })
         
         # Check if this is a complete summary with all required sections
